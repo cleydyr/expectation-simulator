@@ -11,15 +11,17 @@ export default class Hypergeometric {
     var s = this.successes;
     var f = this.failures;
 
-    for (var i = 0; i < this.sampleSize; i++) {
-      if (bernoulli(s / (s + f))) {
-        s--;
-      } else {
-        f--;
-      }
-    }
+    const trials = [...(new Array(this.sampleSize))]
+      .reduce(({s, f}) => {
+        const success = bernoulli(s/(s + f));
 
-    return this.successes - s;
+        return {
+          s: s - success,
+          f: f - !success,
+        };
+      }, {s: this.successes, f: this.failures});
+
+    return this.successes - trials.s;
   }
 
   mean = () => this.sampleSize*this.successes/(this.successes + this.failures);
