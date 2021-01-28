@@ -124,7 +124,7 @@ class App extends React.Component {
             }
           </div>
           <div>
-            {this.state.loading ? <ClayLoadingIndicator /> :
+            {
             (
               <ClayChart
                 data={{
