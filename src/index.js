@@ -9,6 +9,7 @@ import ReactDOM from "react-dom";
 import "@clayui/css/lib/css/atlas.css";
 
 import HyperGeometricForm from "./HypergeometricForm";
+import average from "./functions/average";
 
 const distributions = [
   HyperGeometricForm,
@@ -16,16 +17,6 @@ const distributions = [
 
 class App extends React.Component {
   static DEFAULT_SIMULATIONS = 1000;
-
-  static average = (data, simulations) => {
-    let m = 0;
-
-    for (var i = 1; i < data.length; i++) {
-      m += (i - 1)*data[i]/simulations;
-    }
-
-    return m;
-  }
 
   constructor() {
     super();
@@ -57,12 +48,12 @@ class App extends React.Component {
             return acc;
           }, []);
 
-        const data = ["data", ...[...experiment].map(v => v || 0)];
+        const filledData = [...experiment].map(v => v || 0);
 
         this.setState({
           ...this.state,
-          data,
-          mean: App.average(data, simulations),
+          data: ["data", ...filledData],
+          mean: average(filledData, simulations),
           loading: false,
         });
       });
