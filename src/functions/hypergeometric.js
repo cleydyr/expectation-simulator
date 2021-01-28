@@ -8,9 +8,6 @@ export default class Hypergeometric {
   }  
 
   trial = () => {
-    var s = this.successes;
-    var f = this.failures;
-
     const trials = [...(new Array(this.sampleSize))]
       .reduce(({s, f}) => {
         const success = bernoulli(s/(s + f));
