@@ -66,8 +66,6 @@ class App extends React.Component {
           loading: false,
         });
       });
-
-      console.log('finish event')
   };
 
   changeParameters = (event) => {
