@@ -12,10 +12,14 @@ import "@clayui/css/lib/css/atlas.css";
 import HyperGeometricForm from "./HypergeometricForm";
 import average from "./functions/average";
 import BinomialForm from "./BinomialForm";
+import GeometricForm from "./GeometricForm";
+import NegativeBinomialForm from "./NegativeBinomialForm";
 
 const distributions = [
   HyperGeometricForm,
   BinomialForm,
+  GeometricForm,
+  NegativeBinomialForm,
 ];
 
 class App extends React.Component {
