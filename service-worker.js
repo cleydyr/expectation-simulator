@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/expectation-simulator/precache-manifest.2815ededc18c6d109f7b02c12a6152d1.js"
+  "/expectation-simulator/precache-manifest.5a5709b3d16d115d134b237ab24ce002.js"
 );
 
 self.addEventListener('message', (event) => {
