@@ -69,32 +69,42 @@ class App extends React.Component {
   render() {
     return (
       <div className="container">
-        {
-          React.createElement(
-            this.state.component,
-            {
-              stateFn: (rv) => this.setState((state) => ({rv})),
-            }
-          )
-        }
-        <label htmlFor="simulations">Number of simulations</label>
-        <ClayInput
-          id="simulations"
-          placeholder="Insert the number of simulations here"
-          type="number"
-          onChange={this.changeParameters}
-          value={this.state.simulations}
-        />
-        <div className="sheet-footer">
-          <div className="btn-group-item">
-            <ClayButton onClick={this.resetFields} displayType="secondary">
-              Reset
-            </ClayButton>
+        <div className="sheet sheet-lg">
+          <div className="sheet-header">
+            <div className="sheet-title">
+              {this.state.component.formName}
+            </div>
           </div>
-          <div className="btn-group-item">
-            <ClayButton onClick={this.simulate} displayType="primary">
-              Simulate
-            </ClayButton>
+          <div className="sheet-section">
+            <h3 className="sheet-subtitle">Parameters</h3>
+            {
+              React.createElement(
+                this.state.component,
+                {
+                  stateFn: (rv) => this.setState((state) => ({rv})),
+                }
+              )
+            }
+          </div>
+          <label htmlFor="simulations">Number of simulations</label>
+          <ClayInput
+            id="simulations"
+            placeholder="Insert the number of simulations here"
+            type="number"
+            onChange={this.changeParameters}
+            value={this.state.simulations}
+          />
+          <div className="sheet-footer">
+            <div className="btn-group-item">
+              <ClayButton onClick={this.resetFields} displayType="secondary">
+                Reset
+              </ClayButton>
+            </div>
+            <div className="btn-group-item">
+              <ClayButton onClick={this.simulate} displayType="primary">
+                Simulate
+              </ClayButton>
+            </div>
           </div>
         </div>
         <div>

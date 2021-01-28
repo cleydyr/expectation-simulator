@@ -47,4 +47,6 @@ const HyperGeometricForm = ({stateFn}) => {
   );
 };
 
+HyperGeometricForm.formName = 'Hypergeometric';
+
 export default HyperGeometricForm;
