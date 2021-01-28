@@ -93,11 +93,6 @@ class App extends React.Component {
     return (
       <div className="container">
         <div className="sheet sheet-lg">
-          <div className="sheet-header">
-            <div className="sheet-title">
-              {form.formName}
-            </div>
-          </div>
           <div className="sheet-section">
             <h3 className="sheet-subtitle">Distribution</h3>
             <ClayRadioGroup
@@ -108,6 +103,11 @@ class App extends React.Component {
             >
               {distributions.map((distribution, i) => <ClayRadio key={i} label={distribution.formName} value={i} />)}
             </ClayRadioGroup>
+          </div>
+          <div className="sheet-header">
+            <div className="sheet-title">
+              {form.formName}
+            </div>
           </div>
           <div className="sheet-section">
             <h3 className="sheet-subtitle">Parameters</h3>
