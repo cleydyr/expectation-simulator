@@ -44,8 +44,6 @@ class App extends React.Component {
   simulate = () => {
     const { simulations, rv } = this.state;
 
-    const data = ["data"];
-
     const rv_generator = rv.gen();
 
     this.setState(
@@ -54,17 +52,16 @@ class App extends React.Component {
         loading: true,
       },
       () => {
-        for (var i = 0; i < simulations; i++) {
-          const next = rv_generator.next();
-  
-          data[next.value + 1] =
-            (data[next.value + 1] === undefined) ? 1 : (data[next.value + 1] + 1);
-        }
-  
-        for (i = 1; i < data.length; i++) {
-          data[i] = data[i] || 0;
-        }
-        
+        const experiment = [...new Array(simulations)]
+          .map(__ => rv_generator.next().value)
+          .reduce((acc, cur) => {
+            acc[cur] = (acc[cur] || 0) + 1;
+
+            return acc;
+          }, []);
+
+        const data = ["data", ...[...experiment].map(v => v || 0)];
+
         this.setState({
           ...this.state,
           data,
