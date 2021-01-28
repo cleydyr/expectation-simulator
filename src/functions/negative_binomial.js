@@ -1,22 +1,28 @@
 import bernoulli from "./bernoulli";
 
 export default class NegativeBinomial {
-  constructor(successes, failures) {
-    this.successes = successes;
-    this.failures = failures;
+  constructor(r, p) {
+    this.r = r;
+    this.p = p;
   }  
 
   trial = () => {
-    var f = this.failures;
+    let f = 0;
+    let s = 0;
 
-    while (!bernoulli(this.successes/(this.successes + f))) {
-        f--;
+    while (s < this.r) {
+        if (bernoulli(this.p)) {
+            s++;
+        }
+        else {
+            f++;
+        }
     }
 
-    return this.failures - f;
+    return f;
   }
 
-  mean = () => (1 - this.p)/this.p;
+  mean = () => this.r*(1 - this.p)/this.p;
 
   gen = function*() {
     while (true) {
