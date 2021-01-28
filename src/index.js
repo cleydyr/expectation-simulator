@@ -1,9 +1,6 @@
 import ClayButton from "@clayui/button";
 import ClayChart from "@clayui/charts";
 import { ClayInput } from "@clayui/form";
-import ClayLoadingIndicator from '@clayui/loading-indicator';
-
-// import ClayProgressBar from "@clayui/progress-bar";
 
 import React from "react";
 import ReactDOM from "react-dom";
