@@ -1,6 +1,7 @@
 import ClayButton from "@clayui/button";
 import ClayChart from "@clayui/charts";
 import { ClayInput } from "@clayui/form";
+import {ClayRadio, ClayRadioGroup} from '@clayui/form';
 
 import React from "react";
 import ReactDOM from "react-dom";
@@ -10,9 +11,11 @@ import "@clayui/css/lib/css/atlas.css";
 
 import HyperGeometricForm from "./HypergeometricForm";
 import average from "./functions/average";
+import BinomialForm from "./BinomialForm";
 
 const distributions = [
   HyperGeometricForm,
+  BinomialForm,
 ];
 
 class App extends React.Component {
@@ -24,7 +27,7 @@ class App extends React.Component {
     this.state = {
       simulations: App.DEFAULT_SIMULATIONS,
       data: ["data"],
-      component: distributions[0],
+      distributionIndex: 0,
       loading: false,
     };
   }
@@ -66,20 +69,47 @@ class App extends React.Component {
     });
   };
 
+  changeDistribution = (index) => {
+    this.setState({
+      distributionIndex: index,
+    });
+  }
+
   render() {
+    const {
+      distributionIndex,
+      simulations,
+      rv,
+      mean,
+      data,
+    } = this.state;
+
+    const form = distributions[distributionIndex];
+
     return (
       <div className="container">
         <div className="sheet sheet-lg">
           <div className="sheet-header">
             <div className="sheet-title">
-              {this.state.component.formName}
+              {form.formName}
             </div>
+          </div>
+          <div className="sheet-section">
+            <h3 className="sheet-subtitle">Distribution</h3>
+            <ClayRadioGroup
+              inline
+              id="distribution"
+              onSelectedValueChange={this.changeDistribution}
+              selectedValue={distributionIndex}
+            >
+              {distributions.map((distribution, i) => <ClayRadio key={i} label={distribution.formName} value={i} />)}
+            </ClayRadioGroup>
           </div>
           <div className="sheet-section">
             <h3 className="sheet-subtitle">Parameters</h3>
             {
               React.createElement(
-                this.state.component,
+                form,
                 {
                   stateFn: (rv) => this.setState((state) => ({rv})),
                 }
@@ -92,7 +122,7 @@ class App extends React.Component {
             placeholder="Insert the number of simulations here"
             type="number"
             onChange={this.changeParameters}
-            value={this.state.simulations}
+            value={simulations}
           />
           <div className="sheet-footer">
             <div className="btn-group-item">
@@ -110,13 +140,12 @@ class App extends React.Component {
         <div>
           <div>
             {
-              this.state.rv && 
-                (<span><strong>Expected value: </strong> {this.state.rv.mean()}</span>)
+              rv && (<span><strong>Expected value: </strong> {rv.mean()}</span>)
             }
           </div>
           <div>
             {
-              (<><strong>Simulation average: </strong> {this.state.mean}</>)
+              (<><strong>Simulation average: </strong> {mean}</>)
             }
           </div>
           <div>
@@ -124,7 +153,7 @@ class App extends React.Component {
             (
               <ClayChart
                 data={{
-                  columns: [this.state.data],
+                  columns: [data],
                   type: "bar"
                 }}
               />
