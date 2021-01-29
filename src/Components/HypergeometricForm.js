@@ -1,7 +1,7 @@
 import ClayForm, { ClayInput } from "@clayui/form";
 import React, { useState, useEffect } from "react";
 import InputErrorFeedback from "./InputErrorFeedback";
-import HyperGeometric from "./functions/hypergeometric";
+import HyperGeometric from "../functions/hypergeometric";
 
 const DEFAULT_SUCCESSES = 30;
 const DEFAULT_FAILURES = 50;

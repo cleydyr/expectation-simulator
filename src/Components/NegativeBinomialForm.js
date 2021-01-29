@@ -1,7 +1,7 @@
 import ClayForm, { ClayInput } from "@clayui/form";
 import React, { useState, useEffect } from "react";
 import InputErrorFeedback from "./InputErrorFeedback";
-import NegativeBinomial from "./functions/negative_binomial";
+import NegativeBinomial from "../functions/negative_binomial";
 
 const DEFAULT_SUCCESSES = 30;
 const DEFAULT_P = 0.5;

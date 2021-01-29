@@ -1,6 +1,6 @@
 import ClayForm, { ClayInput } from "@clayui/form";
 import React, { useState, useEffect } from "react";
-import Binomial from "./functions/binomial";
+import Binomial from "../functions/binomial";
 
 import InputErrorFeedback from "./InputErrorFeedback";
 

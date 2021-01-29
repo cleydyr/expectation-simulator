@@ -9,11 +9,11 @@ import ReactDOM from "react-dom";
 // Imports the @clayui/css package CSS
 import "@clayui/css/lib/css/atlas.css";
 
-import HyperGeometricForm from "./HypergeometricForm";
+import HyperGeometricForm from "./components/HypergeometricForm";
 import average from "./functions/average";
-import BinomialForm from "./BinomialForm";
-import GeometricForm from "./GeometricForm";
-import NegativeBinomialForm from "./NegativeBinomialForm";
+import BinomialForm from "./components/BinomialForm";
+import GeometricForm from "./components/GeometricForm";
+import NegativeBinomialForm from "./components/NegativeBinomialForm";
 
 const distributions = [
   HyperGeometricForm,

@@ -1,7 +1,7 @@
 import ClayForm, { ClayInput } from "@clayui/form";
 import React, { useState, useEffect } from "react";
 import InputErrorFeedback from "./InputErrorFeedback";
-import Geometric from "./functions/geometric";
+import Geometric from "../functions/geometric";
 
 const DEFAULT_P = 0.5;
 
