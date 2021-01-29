@@ -1,5 +1,6 @@
 import ClayForm, { ClayInput } from "@clayui/form";
 import React, { useState, useEffect } from "react";
+import InputErrorFeedback from "./InputErrorFeedback";
 import Geometric from "./functions/geometric";
 
 const DEFAULT_P = 0.5;
@@ -10,11 +11,13 @@ const GeometricForm = ({stateFn}) => {
   const [p, setP] = useState(DEFAULT_P);
 
   useEffect(() => {
-    stateFn(new Geometric(p));
+    if (p > 0 && p < 1) {
+      stateFn(new Geometric(p));
+    }
   }, [p, ]);
 
   return (
-    <ClayForm.Group>
+    <ClayForm.Group className={ (p <= 0 || p > 1) && "has-error"}>
       <label htmlFor="p">p</label>
       <ClayInput
         id="p"
@@ -23,6 +26,12 @@ const GeometricForm = ({stateFn}) => {
         step="0.05"
         onChange={processEvent(setP)}
         value={p}
+        min={0}
+        max={1}
+      />
+      <InputErrorFeedback
+        show={p <= 0 || p > 1}
+        message="The value of p must be between 0 (exclusive) and 1!"
       />
     </ClayForm.Group>
   );

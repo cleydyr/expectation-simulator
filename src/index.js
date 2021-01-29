@@ -30,7 +30,7 @@ class App extends React.Component {
 
     this.state = {
       simulations: App.DEFAULT_SIMULATIONS,
-      data: ["data"],
+      data: ["count"],
       distributionIndex: 0,
       loading: false,
     };
@@ -43,7 +43,6 @@ class App extends React.Component {
 
     this.setState(
       {
-        ...this.state,
         loading: true,
       },
       () => {
@@ -58,8 +57,7 @@ class App extends React.Component {
         const filledData = [...experiment].map(v => v || 0);
 
         this.setState({
-          ...this.state,
-          data: ["data", ...filledData],
+          data: ["count", ...filledData],
           mean: average(filledData, simulations),
           loading: false,
         });
@@ -68,7 +66,6 @@ class App extends React.Component {
 
   changeParameters = (event) => {
     this.setState({
-      ...this.state,
       [event.target.id]: Number(event.target.value)
     });
   };

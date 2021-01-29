@@ -1,5 +1,6 @@
 import ClayForm, { ClayInput } from "@clayui/form";
 import React, { useState, useEffect } from "react";
+import InputErrorFeedback from "./InputErrorFeedback";
 import NegativeBinomial from "./functions/negative_binomial";
 
 const DEFAULT_SUCCESSES = 30;
@@ -11,12 +12,16 @@ const NegativeBinomialForm = ({stateFn}) => {
   const [successes, setSuccesses] = useState(DEFAULT_SUCCESSES);
   const [p, setP] = useState(DEFAULT_P);
 
+  const allGood = (p, successes) => p > 0 && p < 1 && successes > 0;
+
   useEffect(() => {
-    stateFn(new NegativeBinomial(successes, p));
+    if (allGood(p, successes)) {
+      stateFn(new NegativeBinomial(successes, p));
+    }
   }, [successes, p,]);
 
   return (
-    <ClayForm.Group>
+    <ClayForm.Group className={ !allGood(p, successes) && "has-error"}>
       <label htmlFor="successes">Successes</label>
       <ClayInput
         id="successes"
@@ -24,6 +29,11 @@ const NegativeBinomialForm = ({stateFn}) => {
         type="number"
         onChange={processEvent(setSuccesses)}
         value={successes}
+        min={1}
+      />
+      <InputErrorFeedback
+        show={successes <= 0}
+        message="The number of successes must be positive!"
       />
       <label htmlFor="p">p</label>
       <ClayInput
@@ -33,6 +43,12 @@ const NegativeBinomialForm = ({stateFn}) => {
         step="0.05"
         onChange={processEvent(setP)}
         value={p}
+        max={1}
+        min={0}
+      />
+      <InputErrorFeedback
+        show={p <= 0 || p > 1}
+        message="The value of p must be between 0 (exclusive) and 1!"
       />
     </ClayForm.Group>
   );
