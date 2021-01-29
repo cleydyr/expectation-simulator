@@ -1,7 +1,7 @@
 import ClayButton from "@clayui/button";
 import ClayChart from "@clayui/charts";
 import { ClayInput } from "@clayui/form";
-import {ClayRadio, ClayRadioGroup} from '@clayui/form';
+import ClayTabs from '@clayui/tabs';
 
 import React from "react";
 import ReactDOM from "react-dom";
@@ -92,14 +92,24 @@ class App extends React.Component {
         <div className="sheet sheet-lg">
           <div className="sheet-section">
             <h3 className="sheet-subtitle">Distribution</h3>
-            <ClayRadioGroup
-              inline
-              id="distribution"
-              onSelectedValueChange={this.changeDistribution}
-              selectedValue={distributionIndex}
-            >
-              {distributions.map((distribution, i) => <ClayRadio key={i} label={distribution.formName} value={i} />)}
-            </ClayRadioGroup>
+            <ClayTabs modern>
+            {
+              distributions.map((distribution, i) =>
+                (
+                  <ClayTabs.Item
+                    key={i}
+                    active={distributionIndex === i}
+                    innerProps={{
+                      "aria-controls": "tabpanel-" + i,
+                    }}
+                    onClick={() => {this.changeDistribution(i)}}
+                  >
+                    {distribution.formName}
+                  </ClayTabs.Item>
+                )
+              )
+            }
+            </ClayTabs>
           </div>
           <div className="sheet-header">
             <div className="sheet-title">
